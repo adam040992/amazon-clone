@@ -12,19 +12,22 @@ import {
 
 function App() {
   return (
-    <div className="App">
+    <Router>
+      <div className="App">
       <Header />
-      <Router>
         <Switch>
+
           <Route exact path="/">
             <Home />
           </Route>
+
           <Route path="/cart">
             <Cart />
           </Route>
+          
         </Switch>
-      </Router>
-    </div>
+      </div>
+    </Router>
   );
 }
 
