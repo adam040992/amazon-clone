@@ -14,4 +14,9 @@ function Cart() {
 
 export default Cart
 
-const Container = styled.div``;
+const Container = styled.div`
+    max-width: 1500px;
+    margin: 0 auto;
+    display: flex;
+    padding: 14px 18px 0 18px; 
+`;
