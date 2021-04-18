@@ -9,8 +9,29 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { db } from './firebase';
 
 function App() {
+
+  const [cartItems, setCartItems] = useState([]);
+
+  const GetCartItems = () => {
+    db.collection('cartitems').onSnapshot((snapshot) => {
+      const tempItems = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        product: doc.data()
+      }))
+      setCartItems(tempItems)
+    })
+  }
+
+  useEffect(() => {
+    GetCartItems();
+  }, [])
+
+  console.log(cartItems);
+
   return (
     <Router>
       <div className="App">
