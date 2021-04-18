@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function Product({ title, price, rating, image }) {
+function Product({ title, price, rating, image, id }) {
     return (
         <Container>
             <Title>
