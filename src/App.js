@@ -13,7 +13,6 @@ import { useEffect, useState } from 'react';
 import { db } from './firebase';
 
 function App() {
-
   const [cartItems, setCartItems] = useState([]);
 
   const GetCartItems = () => {
@@ -30,8 +29,6 @@ function App() {
     GetCartItems();
   }, [])
 
-  console.log(cartItems);
-
   return (
     <Router>
       <div className="App">
@@ -43,7 +40,7 @@ function App() {
           </Route>
 
           <Route path="/cart">
-            <Cart />
+            <Cart cartItems={cartItems} />
           </Route>
           
         </Switch>

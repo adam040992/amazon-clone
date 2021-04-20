@@ -1,21 +1,31 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function CartItem() {
+function CartItem({ id, item }) {
+
+    let options = []
+
+    for (let i = 1; i < Math.max(item.quantity + 1, 20); i++ ) {
+        options.push(<option value={i}> Qty: {i}</option>)
+    }
+
     return (
         <Container>
             <ImageContainer>
-                <img src={"https://res-1.cloudinary.com/grover/image/upload/e_trim/c_limit,f_auto,fl_png8.lossy,h_1280,q_auto,w_1280/v1585126619/tk8sr569tsqiwypredd7.png"} />
+                <img src={item.image} />
             </ImageContainer>
 
             <CartItemInfo>
                 <CartItemInfoTop>
-                    <h2>New Apple IPad Pro</h2>
+                    <h2>{item.name}</h2>
                 </CartItemInfoTop>
 
                 <CartItemInfoBottom>
                     <CartItemQuantityContainer>
-                        5
+                        <select>
+                            {options}
+                        </select>
+                        {item.quantity}
                     </CartItemQuantityContainer>
                     
                     <CartItemDeleteContainer>
@@ -25,7 +35,7 @@ function CartItem() {
             </CartItemInfo>
 
             <CartItemPrice>
-                $1449
+                ${item.price}
             </CartItemPrice>
         </Container>
     )
@@ -53,7 +63,9 @@ const ImageContainer = styled.div`
     }
 `;
 
-const CartItemInfo = styled.div``;
+const CartItemInfo = styled.div`
+    flex-grow: 1;
+`;
 
 const CartItemInfoTop = styled.div`
     color: #007185;
