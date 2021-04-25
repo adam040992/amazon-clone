@@ -1,11 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
+import NumberFormat from 'react-number-format';
 
-function CartTotal({ getTotalPrice }) {
+function CartTotal({ getTotalPrice, getTotalCount }) {
 
     return (
         <Container>
-            <Subtotal>Subtotal ( 2 items): ${getTotalPrice()} </Subtotal>
+            <Subtotal>Subtotal ({getTotalCount()} items):
+                <br />
+                <NumberFormat value={getTotalPrice()} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+            </Subtotal>
             <CheckoutButton>Proceed to checkout</CheckoutButton>
         </Container>
     )
