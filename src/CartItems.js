@@ -18,7 +18,6 @@ function CartItems({ cartItems }) {
                         />
                     ))
                 }
-                {/* <CartItem /> */}
             </ItemsContainer>
         </Container>
     )
