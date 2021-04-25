@@ -3,6 +3,7 @@ import './App.css';
 import Header from './Header';
 import Cart from './Cart';
 import Home from './Home';
+import Login from './Login';
 import {
   BrowserRouter as Router,
   Switch,
@@ -34,7 +35,6 @@ function App() {
       <div className="App">
       <Header cartItems={cartItems} />
         <Switch>
-
           <Route exact path="/">
             <Home />
           </Route>
@@ -42,7 +42,10 @@ function App() {
           <Route path="/cart">
             <Cart cartItems={cartItems} />
           </Route>
-          
+
+          <Route patch="/login">
+            <Login />
+          </Route>
         </Switch>
       </div>
     </Router>

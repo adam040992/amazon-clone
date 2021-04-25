@@ -17,7 +17,8 @@ function CartItem({ id, item }) {
         })
     }
 
-    const removeProduct = (e) => {
+    const deleteItem = (e) => {
+        e.preventDefault();
         db.collection('cartitems').doc(id).delete();
     }
 
@@ -42,7 +43,9 @@ function CartItem({ id, item }) {
                         </select>
                     </CartItemQuantityContainer>
                     
-                    <CartItemDeleteContainer onClick={(e) => removeProduct(e)}>
+                    <CartItemDeleteContainer 
+                        onClick={(e) => deleteItem(e)}
+                    >
                         Delete
                     </CartItemDeleteContainer>
                 </CartItemInfoBottom>
@@ -113,10 +116,6 @@ const CartItemDeleteContainer = styled.div`
     color: #007185;
     margin-left: 16px;
     cursor: pointer;
-
-    :hover {
-        color: red;
-    }
 `;
 
 const CartItemPrice = styled.div`
