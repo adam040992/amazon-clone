@@ -11,10 +11,11 @@ import {
   Link
 } from "react-router-dom";
 import { useEffect, useState } from 'react';
-import { db } from './firebase';
+import { auth, db } from './firebase';
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
 
   const GetCartItems = () => {
     db.collection('cartitems').onSnapshot((snapshot) => {
@@ -26,28 +27,41 @@ function App() {
     })
   }
 
+  const signOut = () => {
+    auth.signOut().then(() => {
+      setUser(null);
+    })
+  }
+
   useEffect(() => {
     GetCartItems();
   }, [])
 
+  console.log("user", user);
+
   return (
     <Router>
-      <div className="App">
-      <Header cartItems={cartItems} />
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
+      {
+        !user ? (
+          <Login setUser={setUser} />
+        ) : (
+          <div className="App">
+            <Header cartItems={cartItems} user={user} signOut={signOut}/>
 
-          <Route path="/cart">
-            <Cart cartItems={cartItems} />
-          </Route>
+            <Switch>
 
-          <Route patch="/login">
-            <Login />
-          </Route>
-        </Switch>
-      </div>
+              <Route exact path="/">
+                <Home />
+              </Route>
+
+              <Route path="/cart">
+                <Cart cartItems={cartItems} />
+              </Route>
+
+            </Switch>
+          </div>
+        )
+      }
     </Router>
   );
 }
